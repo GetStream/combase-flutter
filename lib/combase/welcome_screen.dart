@@ -23,8 +23,10 @@ class _CombaseWelcomeState extends State<CombaseWelcome> {
           elevation: 6.0,
           child: SingleChildScrollView(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 8.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -33,8 +35,9 @@ class _CombaseWelcomeState extends State<CombaseWelcome> {
                     height: 72.0,
                     width: 72.0,
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: context.combaseTheme.combaseGradient),
+                      shape: BoxShape.circle,
+                      gradient: context.combaseTheme.combaseGradient,
+                    ),
                     child: Center(
                       child: Text(
                         "C",
@@ -47,8 +50,10 @@ class _CombaseWelcomeState extends State<CombaseWelcome> {
                     ),
                   ),
                   const SizedBox(height: 8.0),
-                  Text("Welcome 👋",
-                      style: context.combaseTheme.primaryTextStyle),
+                  Text(
+                    "Welcome 👋",
+                    style: context.combaseTheme.primaryTextStyle,
+                  ),
                   Text(
                     "Description for the organization goes here",
                     style: context.combaseTheme.secondaryTextStyle,
@@ -71,14 +76,17 @@ class _CombaseWelcomeState extends State<CombaseWelcome> {
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.resolveWith((_) => 2.0),
                       backgroundColor: MaterialStateColor.resolveWith(
-                          (_) => context.combaseTheme.primaryColor),
+                        (_) => context.combaseTheme.primaryColor,
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 80.0, vertical: 10.0),
                       child: Text(
                         "Start Chat",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   )

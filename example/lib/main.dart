@@ -14,9 +14,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
-      home: Combase(
-        child: MyHomePage(),
-      ),
+      home: MyHomePage(),
     );
   }
 }
@@ -33,7 +31,12 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("Combase Demo"),
       ),
-      body: Center(child: Text("Press the FAB")),
+      body: Container(
+        child: Center(
+          child: Text("Press the FAB"),
+        ),
+      ),
+      floatingActionButton: CombaseAction(),
     );
   }
 }

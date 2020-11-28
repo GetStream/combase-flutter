@@ -22,7 +22,7 @@ class CombaseTheme extends StatelessWidget {
   static CombaseThemeData of(BuildContext context) {
     final _CombaseThemeProvider _data =
         context.dependOnInheritedWidgetOfExactType<_CombaseThemeProvider>();
-    return _data.theme.data;
+    return _data?.theme?.data;
   }
 }
 

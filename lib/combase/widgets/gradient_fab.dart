@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -18,20 +17,22 @@ class GradientFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
-      decoration: BoxDecoration(
-        boxShadow: kElevationToShadow[12],
-        shape: BoxShape.circle,
-        gradient: context.combaseTheme.combaseGradient
-      ),
-      clipBehavior: Clip.hardEdge,
-      child: Material(
-        type: MaterialType.transparency,
+    return Material(
+      elevation: 12.0,
+      shape: CircleBorder(),
+      clipBehavior: Clip.antiAlias,
+      child: Ink(
+        decoration: BoxDecoration(
+          gradient: context.combaseTheme.combaseGradient,
+        ),
         child: InkWell(
           onTap: onPressed,
-          child: Center(
-            child: child,
+          child: SizedBox(
+            width: 56.0,
+            height: 56.0,
+            child: Center(
+              child: child,
+            ),
           ),
         ),
       ),

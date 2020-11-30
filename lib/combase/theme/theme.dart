@@ -26,7 +26,6 @@ class CombaseTheme extends StatelessWidget {
   }
 }
 
-
 class _CombaseThemeProvider extends InheritedWidget {
   const _CombaseThemeProvider({
     Key key,

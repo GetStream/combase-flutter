@@ -1,7 +1,7 @@
 import 'package:combase_flutter/combase/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 
-import './theme/theme.dart';
+import '../theme/theme.dart';
 
 class CombaseWelcome extends StatefulWidget {
   const CombaseWelcome({

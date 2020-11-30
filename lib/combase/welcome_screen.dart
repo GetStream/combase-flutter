@@ -1,5 +1,6 @@
 import 'package:combase_flutter/combase/theme/theme_data.dart';
 import 'package:flutter/material.dart';
+
 import './theme/theme.dart';
 
 class CombaseWelcome extends StatefulWidget {
@@ -15,7 +16,10 @@ class _CombaseWelcomeState extends State<CombaseWelcome> {
   @override
   Widget build(BuildContext context) {
     return CombaseTheme(
-      data: context.combaseTheme ?? CombaseThemeData(),
+      data: context.combaseTheme ??
+          CombaseThemeData(
+            brightness: Theme.of(context).brightness,
+          ),
       child: Builder(builder: (BuildContext context) {
         return Material(
           color: context.combaseTheme.surfaceColor,

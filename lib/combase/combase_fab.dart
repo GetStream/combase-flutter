@@ -24,7 +24,10 @@ class _CombaseActionState extends State<CombaseAction> {
 
   void onFabPressed() {
     _updateFabStatus();
-    final theme = CombaseTheme.of(context) ?? CombaseThemeData();
+    final theme = CombaseTheme.of(context) ??
+        CombaseThemeData(
+          brightness: Theme.of(context).brightness,
+        );
     Navigator.of(context).push(
       FabWidgetRoute(
         onPop: _updateFabStatus,
@@ -53,7 +56,10 @@ class _CombaseActionState extends State<CombaseAction> {
     return CompositedTransformTarget(
       link: _layerLink,
       child: CombaseTheme(
-        data: widget.theme ?? CombaseThemeData(),
+        data: widget.theme ??
+            CombaseThemeData(
+              brightness: Theme.of(context).brightness,
+            ),
         child: GradientFab(
           onPressed: onFabPressed,
           child: ValueListenableBuilder<bool>(

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:combase_flutter/combase_flutter.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Combase Demo',
       theme: ThemeData(
-        brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),

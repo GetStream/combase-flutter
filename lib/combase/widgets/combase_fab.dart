@@ -2,9 +2,9 @@ import 'package:combase_flutter/combase/theme/theme.dart';
 import 'package:combase_flutter/combase_flutter.dart';
 import 'package:flutter/material.dart';
 
-import './welcome_screen.dart';
-import 'widgets/fab_route.dart';
-import 'widgets/gradient_fab.dart';
+import '../screens/welcome_screen.dart';
+import 'fab_route.dart';
+import 'gradient_fab.dart';
 
 class CombaseAction extends StatefulWidget {
   const CombaseAction({Key key, this.theme}) : super(key: key);

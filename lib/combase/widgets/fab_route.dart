@@ -40,7 +40,7 @@ class FabWidgetRoute extends PopupRoute {
   Duration get transitionDuration => animationDuration;
 
   @override
-  bool didPop(result) {
+  bool didPop(dynamic result) {
     if (onPop != null) onPop();
     return super.didPop(result);
   }

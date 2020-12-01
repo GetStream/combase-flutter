@@ -15,8 +15,8 @@ class CombaseAction extends StatefulWidget {
 }
 
 class _CombaseActionState extends State<CombaseAction> {
-  ValueNotifier<bool> _showOnboardingDialog = ValueNotifier<bool>(false);
-  LayerLink _layerLink = LayerLink();
+  final ValueNotifier<bool> _showOnboardingDialog = ValueNotifier<bool>(false);
+  final LayerLink _layerLink = LayerLink();
 
   void _updateFabStatus() {
     _showOnboardingDialog.value = !_showOnboardingDialog.value;
@@ -34,14 +34,14 @@ class _CombaseActionState extends State<CombaseAction> {
         builder: (BuildContext context) {
           return Align(
             child: CompositedTransformFollower(
-              targetAnchor: Alignment(1.0, -1.4),
+              targetAnchor: const Alignment(1.0, -1.4),
               followerAnchor: Alignment.bottomRight,
               link: _layerLink,
               child: SizedBox.fromSize(
-                size: theme.combasePopupize,
+                size: theme.combasePopupSize,
                 child: CombaseTheme(
                   data: theme,
-                  child: CombaseWelcome(),
+                  child: const CombaseWelcome(),
                 ),
               ),
             ),
@@ -70,12 +70,12 @@ class _CombaseActionState extends State<CombaseAction> {
                 switchInCurve: Curves.ease,
                 switchOutCurve: Curves.ease,
                 child: value
-                    ? Icon(
+                    ? const Icon(
                         Icons.close,
                         size: 24.0,
                         color: Colors.white,
                       )
-                    : Text(
+                    : const Text(
                         '💭',
                         style: TextStyle(fontSize: 24.0),
                       ),

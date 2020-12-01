@@ -6,7 +6,7 @@ class StreamLogo extends StatelessWidget {
     return Align(
       alignment: FractionalOffset.bottomCenter,
       child: Container(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           bottom: 12.0,
         ),
         height: 30.0,

@@ -19,7 +19,7 @@ class GradientFab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 12.0,
-      shape: CircleBorder(),
+      shape: const CircleBorder(),
       clipBehavior: Clip.antiAlias,
       child: Ink(
         decoration: BoxDecoration(

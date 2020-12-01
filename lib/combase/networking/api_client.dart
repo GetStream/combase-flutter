@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' show log;
 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -25,7 +26,8 @@ class ApiClient {
     );
 
     if (response.statusCode == 200) {
-      final result = jsonDecode(response.body)['data']['getOrCreateUser'];
+      final result = jsonDecode(response.body)['data']['getOrCreateUser']
+          as Map<String, dynamic>;
       return CreateUserResult.fromMap(result);
     } else {
       throw StateError("Combase api returned invalid status code");
@@ -49,7 +51,7 @@ class ApiClient {
 
     if (response.statusCode == 200) {
       final result = jsonDecode(response.body)['data']['organizationById']
-          ['stream']['key'];
+          ['stream']['key'] as String;
       return result;
     } else {
       throw StateError("Combase api returned invalid status code");
@@ -75,7 +77,7 @@ class ApiClient {
       );
       return streamClient;
     } catch (error) {
-      print(error?.toString());
+      log(error?.toString());
       throw Exception("Error initializing Stream SDK.");
     }
   }
@@ -98,30 +100,31 @@ class ApiClient {
       );
 
       if (response.statusCode == 200) {
-        final result = jsonDecode(response.body)['data']['createTicket']['_id'];
+        final result =
+            jsonDecode(response.body)['data']['createTicket']['_id'] as String;
         return result;
       } else {
         throw StateError("Something went wrong.");
       }
     } catch (error) {
-      print(error);
+      log(error.toString());
       throw Exception("Error creating ticket for $userId.");
     }
   }
 }
 
 class CreateUserResult {
+  factory CreateUserResult.fromMap(Map<String, dynamic> map) {
+    return CreateUserResult(
+      userId: map['_id'] as String,
+      name: map['name'] as String,
+      streamToken: map['streamToken'] as String,
+    );
+  }
+
   CreateUserResult({this.userId, this.name, this.streamToken});
 
   final String userId;
   final String name;
   final String streamToken;
-
-  factory CreateUserResult.fromMap(Map<String, dynamic> map) {
-    return CreateUserResult(
-      userId: map['_id'],
-      name: map['name'],
-      streamToken: map['streamToken'],
-    );
-  }
 }

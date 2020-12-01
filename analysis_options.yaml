@@ -1,0 +1,10 @@
+include: package:lint/analysis_options_package.yaml
+
+linter:
+  rules:
+    # Util classes are awesome!
+    avoid_classes_with_only_static_members: false
+    sort_constructors_first: true
+
+    # Temporarily disabled. To be enabled during documentation phase.
+#    public_member_api_docs: true

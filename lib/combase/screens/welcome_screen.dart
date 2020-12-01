@@ -63,11 +63,11 @@ class _CombaseWelcomeState extends State<CombaseWelcome> {
         MaterialPageRoute(
           builder: (context) {
             return StreamChat(
+              client: client,
               child: StreamChannel(
                 channel: channel,
-                child: ConversationPage(),
+                child: const ConversationPage(),
               ),
-              client: client,
             );
           },
         ),
@@ -114,7 +114,7 @@ class _CombaseWelcomeState extends State<CombaseWelcome> {
                         shape: BoxShape.circle,
                         gradient: context.combaseTheme.combaseGradient,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "C",
                           style: TextStyle(
@@ -159,8 +159,8 @@ class _CombaseWelcomeState extends State<CombaseWelcome> {
                           (_) => context.combaseTheme.primaryColor,
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 80.0, vertical: 10.0),
                         child: Text(
                           "Start Chat",
@@ -196,7 +196,7 @@ class _CombaseTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         minHeight: 42.0,
         maxHeight: 56.0,
       ),
@@ -216,13 +216,13 @@ class _CombaseTextField extends StatelessWidget {
             }
           },
           controller: controller,
-          style: TextStyle(
-            color: const Color(0xffafafaf),
+          style: const TextStyle(
+            color: Color(0xffafafaf),
           ),
           decoration: InputDecoration.collapsed(
             hintText: hintText,
-            hintStyle: TextStyle(
-              color: const Color(0xffafafaf),
+            hintStyle: const TextStyle(
+              color: Color(0xffafafaf),
             ),
           ),
         ),

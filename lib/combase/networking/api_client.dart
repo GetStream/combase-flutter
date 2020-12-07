@@ -6,10 +6,10 @@ import 'package:http/http.dart' as http;
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ApiClient {
-  static const _baseUrl = "http://localhost:8080/graphql";
   ApiClient(this.combaseOrganizationKey);
 
   final String combaseOrganizationKey;
+  static const _baseUrl = "https://api.combase.app/graphql";
 
   Future<CreateUserResult> createUser({
     @required final String name,

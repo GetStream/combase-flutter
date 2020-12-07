@@ -7,6 +7,9 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ApiClient {
   static const _baseUrl = "http://localhost:8080/graphql";
+  ApiClient(this.combaseOrganizationKey);
+
+  final String combaseOrganizationKey;
 
   Future<CreateUserResult> createUser({
     @required final String name,
@@ -21,7 +24,7 @@ class ApiClient {
       body: createUserMutation,
       headers: {
         "Content-Type": "application/json",
-        'combase-organization': 'Your-Combase-Key'
+        'combase-organization': combaseOrganizationKey,
       },
     );
 
@@ -34,9 +37,7 @@ class ApiClient {
     }
   }
 
-  Future<String> retrieveOrganizationApiKey({
-    String combaseOrganizationKey = "Your-combase-key",
-  }) async {
+  Future<String> retrieveOrganizationApiKey() async {
     final query =
         '{"query":" query {organizationById(_id: \\"$combaseOrganizationKey\\") {stream {key}}}"}';
 
@@ -84,7 +85,6 @@ class ApiClient {
 
   /// Returns channel id.
   Future<String> createTicket({
-    @required final String combaseOrganizationKey,
     @required final String userId,
   }) async {
     try {

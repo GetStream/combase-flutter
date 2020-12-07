@@ -1,21 +1,26 @@
 import 'package:combase_flutter/combase/networking/api_client.dart';
 import 'package:combase_flutter/combase/screens/conversation_screen.dart';
 import 'package:combase_flutter/combase/theme/theme_data.dart';
+import 'package:combase_flutter/combase/widgets/combase_text_field.dart';
 import 'package:combase_flutter/combase/widgets/stream_logo.dart';
 import 'package:combase_flutter/combase_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-class CombaseWelcome extends StatefulWidget {
-  const CombaseWelcome({
+class Combase extends StatefulWidget {
+  Combase({
     Key key,
-  }) : super(key: key);
+    @required final String organizationKey,
+  })  : apiClient = ApiClient(organizationKey),
+        super(key: key);
+
+  final ApiClient apiClient;
 
   @override
-  _CombaseWelcomeState createState() => _CombaseWelcomeState();
+  _CombaseState createState() => _CombaseState();
 }
 
-class _CombaseWelcomeState extends State<CombaseWelcome> {
+class _CombaseState extends State<Combase> {
   TextEditingController nameController;
   TextEditingController emailController;
   TextEditingController messageController;

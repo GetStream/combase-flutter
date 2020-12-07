@@ -136,7 +136,6 @@ class _CombaseWelcome extends StatelessWidget {
         child: Form(
           key: formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 24.0),
@@ -203,15 +202,15 @@ class _CombaseWelcome extends StatelessWidget {
                           (_) => context.combaseTheme.primaryColor,
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Start Chat",
                         style: TextStyle(
                           color: Colors.white,
                         ),
                       ),
                     ),
-                    Spacer(),
-                    Align(
+                    const Spacer(),
+                    const Align(
                       alignment: Alignment.bottomCenter,
                       child: StreamLogo(),
                     ),

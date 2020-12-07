@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class StreamLogo extends StatelessWidget {
+  const StreamLogo({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Align(

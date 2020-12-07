@@ -18,7 +18,7 @@ class ConversationPage extends StatelessWidget {
               child: MessageListView(),
             ),
             MessageInput(),
-            StreamLogo(),
+            const StreamLogo(),
           ],
         ),
       ),

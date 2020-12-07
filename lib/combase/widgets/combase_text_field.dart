@@ -28,7 +28,6 @@ class _CombaseTextFieldState extends State<CombaseTextField> {
         color: const Color(0xfff5f6f8),
       ),
       child: Align(
-        alignment: Alignment.center,
         child: TextFormField(
           validator: (value) {
             if (value == null || value.isEmpty) {

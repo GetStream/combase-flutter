@@ -114,6 +114,12 @@ class ApiClient {
 }
 
 class CreateUserResult {
+  CreateUserResult({
+    this.userId,
+    this.name,
+    this.streamToken,
+  });
+
   factory CreateUserResult.fromMap(Map<String, dynamic> map) {
     return CreateUserResult(
       userId: map['_id'] as String,
@@ -121,8 +127,6 @@ class CreateUserResult {
       streamToken: map['streamToken'] as String,
     );
   }
-
-  CreateUserResult({this.userId, this.name, this.streamToken});
 
   final String userId;
   final String name;

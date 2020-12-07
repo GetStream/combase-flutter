@@ -35,7 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text("Press the FAB"),
         ),
       ),
-      floatingActionButton: CombaseAction(),
+      floatingActionButton: CombaseAction(
+        organizationKey: "YOUR-API-KEY",
+      ),
     );
   }
 }

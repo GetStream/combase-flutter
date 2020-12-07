@@ -37,7 +37,8 @@ class _CombaseState extends State<Combase> {
 
   Future<void> startChat() async {
     if (_formKey.currentState.validate()) {
-      final apiClient = ApiClient();
+      final apiClient = widget.apiClient;
+
       final String name = nameController.value.text;
       final String email = emailController.value.text;
       final String message = messageController.value.text;
@@ -51,7 +52,6 @@ class _CombaseState extends State<Combase> {
         name: user.name,
       );
       final String channelId = await apiClient.createTicket(
-        combaseOrganizationKey: "Your-combase-key",
         userId: user.userId,
       );
 

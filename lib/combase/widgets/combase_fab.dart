@@ -1,3 +1,4 @@
+import 'package:combase_flutter/combase/constans.dart';
 import 'package:combase_flutter/combase/theme/theme.dart';
 import 'package:combase_flutter/combase_flutter.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,15 @@ import 'fab_route.dart';
 import 'gradient_fab.dart';
 
 class CombaseAction extends StatefulWidget {
-  const CombaseAction({Key key, this.theme}) : super(key: key);
+  const CombaseAction({
+    Key key,
+    @required this.organizationKey,
+    this.theme,
+  })  : assert(organizationKey != null),
+        super(key: key);
+
   final CombaseThemeData theme;
+  final String organizationKey;
 
   @override
   _CombaseActionState createState() => _CombaseActionState();
@@ -24,31 +32,54 @@ class _CombaseActionState extends State<CombaseAction> {
 
   void onFabPressed() {
     _updateFabStatus();
-    final theme = CombaseTheme.of(context) ??
-        CombaseThemeData(
-          brightness: Theme.of(context).brightness,
-        );
-    Navigator.of(context).push(
-      FabWidgetRoute(
-        onPop: _updateFabStatus,
-        builder: (BuildContext context) {
-          return Align(
-            child: CompositedTransformFollower(
-              targetAnchor: const Alignment(1.0, -1.4),
-              followerAnchor: Alignment.bottomRight,
-              link: _layerLink,
-              child: SizedBox.fromSize(
-                size: theme.combasePopupSize,
-                child: CombaseTheme(
-                  data: theme,
-                  child: const CombaseWelcome(),
+
+    final screenSize = MediaQuery.of(context).size.shortestSide;
+    if (screenSize > Constants.kBreakpoint) {
+      final theme = CombaseTheme.of(context) ??
+          CombaseThemeData(
+            brightness: Theme.of(context).brightness,
+          );
+      Navigator.of(context).push(
+        FabWidgetRoute(
+          onPop: _updateFabStatus,
+          builder: (BuildContext context) {
+            return Align(
+              child: CompositedTransformFollower(
+                targetAnchor: const Alignment(1.0, -1.4),
+                followerAnchor: Alignment.bottomRight,
+                link: _layerLink,
+                child: SizedBox.fromSize(
+                  size: theme.combasePopupSize,
+                  child: CombaseTheme(
+                    data: theme,
+                    child: Combase(
+                      organizationKey: widget.organizationKey,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        ),
+      );
+    } else {
+      final theme = CombaseTheme.of(context) ??
+          CombaseThemeData(
+              brightness: Theme.of(context).brightness, borderRadius: 0.0);
+      _updateFabStatus();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return CombaseTheme(
+              data: theme,
+              child: Combase(
+                organizationKey: widget.organizationKey,
+              ),
+            );
+          },
+        ),
+      );
+    }
   }
 
   @override

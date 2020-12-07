@@ -90,73 +90,112 @@ class _CombaseState extends State<Combase> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.combaseTheme ??
+        CombaseThemeData(brightness: Theme.of(context).brightness);
+
     return CombaseTheme(
-      data: context.combaseTheme ??
-          CombaseThemeData(
-            brightness: Theme.of(context).brightness,
-          ),
-      child: Builder(builder: (BuildContext context) {
-        return Material(
-          color: context.combaseTheme.surfaceColor,
-          borderRadius: BorderRadius.circular(16.0),
-          elevation: 6.0,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 8.0,
+      data: theme,
+      child: _CombaseWelcome(
+        formKey: _formKey,
+        emailController: emailController,
+        messageController: messageController,
+        nameController: nameController,
+        onStartChatPressed: startChat,
+      ),
+    );
+  }
+}
+
+class _CombaseWelcome extends StatelessWidget {
+  const _CombaseWelcome({
+    Key key,
+    @required this.formKey,
+    @required this.nameController,
+    @required this.emailController,
+    @required this.messageController,
+    @required this.onStartChatPressed,
+  }) : super(key: key);
+
+  final GlobalKey<FormState> formKey;
+  final TextEditingController nameController;
+  final TextEditingController emailController;
+  final TextEditingController messageController;
+  final VoidCallback onStartChatPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: context.combaseTheme.surfaceColor,
+      borderRadius: BorderRadius.circular(context.combaseTheme.borderRadius),
+      elevation: 6.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24.0,
+          vertical: 8.0,
+        ),
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 24.0),
+              Ink(
+                height: 72.0,
+                width: 72.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: context.combaseTheme.combaseGradient,
+                ),
+                child: const Center(
+                  child: Text(
+                    "C",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 36.0,
+                    ),
+                  ),
+                ),
               ),
-              child: Form(
-                key: _formKey,
+              const SizedBox(height: 8.0),
+              Text(
+                "Welcome 👋",
+                style: context.combaseTheme.primaryTextStyle,
+              ),
+              Text(
+                "Description for the organization goes here",
+                style: context.combaseTheme.secondaryTextStyle,
+              ),
+              const SizedBox(height: 48.0),
+              Flexible(
+                flex: 2,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  // mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: 24.0),
-                    Ink(
-                      height: 72.0,
-                      width: 72.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: context.combaseTheme.combaseGradient,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "C",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 36.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    Text(
-                      "Welcome 👋",
-                      style: context.combaseTheme.primaryTextStyle,
-                    ),
-                    Text(
-                      "Description for the organization goes here",
-                      style: context.combaseTheme.secondaryTextStyle,
-                    ),
-                    const SizedBox(height: 48.0),
-                    _CombaseTextField(
+                    CombaseTextField(
                       controller: nameController,
                       hintText: "Name",
                     ),
                     const SizedBox(height: 24.0),
-                    _CombaseTextField(
+                    CombaseTextField(
                       controller: emailController,
                       hintText: "Email",
                     ),
                     const SizedBox(height: 24.0),
-                    _CombaseTextField(
+                    CombaseTextField(
                       controller: messageController,
                       hintText: "Message",
                     ),
-                    const SizedBox(height: 58.0),
+                  ],
+                ),
+              ),
+              Flexible(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 12.0),
                     ElevatedButton(
-                      onPressed: startChat,
+                      onPressed: onStartChatPressed,
                       style: ButtonStyle(
                         elevation:
                             MaterialStateProperty.resolveWith((_) => 2.0),
@@ -164,71 +203,22 @@ class _CombaseState extends State<Combase> {
                           (_) => context.combaseTheme.primaryColor,
                         ),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 80.0, vertical: 10.0),
-                        child: Text(
-                          "Start Chat",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                      child: Text(
+                        "Start Chat",
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8.0),
-                    StreamLogo(),
+                    Spacer(),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: StreamLogo(),
+                    ),
                   ],
                 ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-}
-
-class _CombaseTextField extends StatelessWidget {
-  const _CombaseTextField({
-    Key key,
-    @required this.hintText,
-    this.controller,
-  }) : super(key: key);
-
-  final String hintText;
-  final TextEditingController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(
-        minHeight: 42.0,
-        maxHeight: 56.0,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: const Color(0xfff5f6f8),
-      ),
-      child: Align(
-        alignment: Alignment.center,
-        child: TextFormField(
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Please fill out all text fields.";
-            } else {
-              return null;
-            }
-          },
-          controller: controller,
-          style: const TextStyle(
-            color: Color(0xffafafaf),
-          ),
-          decoration: InputDecoration.collapsed(
-            hintText: hintText,
-            hintStyle: const TextStyle(
-              color: Color(0xffafafaf),
-            ),
+              )
+            ],
           ),
         ),
       ),

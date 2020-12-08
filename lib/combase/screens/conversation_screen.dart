@@ -9,19 +9,50 @@ class ConversationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: ChannelHeader(),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: MessageListView(),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxWidth > Constants.kBreakpoint) {
+          return Scaffold(
+            backgroundColor: context.combaseTheme.surfaceColor,
+            appBar: ChannelHeader(),
+            body: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: MessageListView(),
+                  ),
+                  const Spacer(),
+                  MessageInput(),
+                  const StreamLogo(),
+                ],
+              ),
             ),
-            MessageInput(),
-            const StreamLogo(),
-          ],
-        ),
-      ),
+          );
+        } else {
+          return Material(
+            color: context.combaseTheme.surfaceColor,
+            elevation: 6.0,
+            borderRadius: BorderRadius.circular(
+              context.combaseTheme.borderRadius,
+            ),
+            child: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 80.0,
+                    child: ChannelHeader(),
+                  ),
+                  Expanded(
+                    child: MessageListView(),
+                  ),
+                  MessageInput(),
+                  const StreamLogo(),
+                ],
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

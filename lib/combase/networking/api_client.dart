@@ -67,7 +67,7 @@ class ApiClient {
   }) async {
     try {
       final streamClient = Client(streamAPIKey);
-      streamClient.setUser(
+      await streamClient.setUser(
         User(
           id: userId,
           extraData: {

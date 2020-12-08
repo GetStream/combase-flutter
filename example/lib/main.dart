@@ -28,12 +28,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Combase Demo"),
+        title: const Text("Combase Demo"),
       ),
-      body: Container(
-        child: Center(
-          child: Text("Press the FAB"),
-        ),
+      body: const Center(
+        child: Text("Press the FAB"),
       ),
       floatingActionButton: CombaseAction(
         organizationKey: "YOUR-API-KEY",

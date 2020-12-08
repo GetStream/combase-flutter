@@ -25,11 +25,13 @@ class _CombaseState extends State<Combase> {
   TextEditingController emailController;
   TextEditingController messageController;
   GlobalKey<FormState> _formKey;
+  GlobalKey<NavigatorState> combaseNavKey;
 
   @override
   void initState() {
     super.initState();
     _formKey = GlobalKey(debugLabel: "Combase welcome form");
+    combaseNavKey = GlobalKey(debugLabel: "Combase navigation key");
     nameController = TextEditingController();
     emailController = TextEditingController();
     messageController = TextEditingController();
@@ -63,10 +65,9 @@ class _CombaseState extends State<Combase> {
         ),
       );
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
+      combaseNavKey.currentState.push(
+        PageRouteBuilder(
+          pageBuilder: (context, _, __) {
             return StreamChat(
               client: client,
               child: StreamChannel(
@@ -95,12 +96,20 @@ class _CombaseState extends State<Combase> {
 
     return CombaseTheme(
       data: theme,
-      child: _CombaseWelcome(
-        formKey: _formKey,
-        emailController: emailController,
-        messageController: messageController,
-        nameController: nameController,
-        onStartChatPressed: startChat,
+      child: Navigator(
+        key: combaseNavKey,
+        onGenerateRoute: (settings) {
+          return PageRouteBuilder(
+            settings: settings,
+            pageBuilder: (context, _, __) => _CombaseWelcome(
+              formKey: _formKey,
+              emailController: emailController,
+              messageController: messageController,
+              nameController: nameController,
+              onStartChatPressed: startChat,
+            ),
+          );
+        },
       ),
     );
   }
